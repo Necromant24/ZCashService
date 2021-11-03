@@ -29,9 +29,13 @@ namespace ZCashTest
             // var balance = service.GetAddressBalance(transparentaddresses);
             //var operationId = service.SendFromToAddress("tmBTsUGEAPy9U4TxMrfgyHdKgPkLwEWDC8N", "tmDjFmaV7AV6FjFumvmLb5LTZ3nNNHKDAKF", 0.03f);
 
-            var txids = service.GetAddressTxIds("tmBTsUGEAPy9U4TxMrfgyHdKgPkLwEWDC8N");
+            // var txids = service.GetAddressTxIds("tmHb2WU7VLYDvH3Vd9BuKcZKUScjxD3vMwz");
+            //
+            var deltas = service.GetAddressDeltas("tmHb2WU7VLYDvH3Vd9BuKcZKUScjxD3vMwz");
+            //
+            // List<string> incomeTxs = service.GetAddressIncomingTransactions("tmHb2WU7VLYDvH3Vd9BuKcZKUScjxD3vMwz");
 
-            var deltas = service.GetAddressDeltas("tmBZcaTUgymzn4fHJP4fGfHoE3RZM5WYmhP");
+            //var txId = service.SendToAddress("tmHb2WU7VLYDvH3Vd9BuKcZKUScjxD3vMwz", 0.04);
 
             var a = 1;
         }

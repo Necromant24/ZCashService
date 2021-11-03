@@ -17,21 +17,21 @@ namespace ZCashTest
 
         public string GetNewAddress()
         {
-            var resp = client.MakeRequest<string>(RestMethods.getnewaddress);
+            var resp = client.MakeRequest<string>(ZecRestMethods.getnewaddress);
 
             return resp;
         }
 
         public object GetListAddresses()
         {
-            var resp = client.MakeRequest<List<ZecAddressListResult>>(RestMethods.listaddresses);
+            var resp = client.MakeRequest<List<ZecAddressListResult>>(ZecRestMethods.listaddresses);
             
             return resp;
         }
         
         public List<string> GetTransparentListAddresses()
         {
-            var resp = client.MakeRequest<List<ZecAddressListResult>>(RestMethods.listaddresses);
+            var resp = client.MakeRequest<List<ZecAddressListResult>>(ZecRestMethods.listaddresses);
             var list = resp.First().Transparent["addresses"];
             
             return list;
@@ -40,7 +40,7 @@ namespace ZCashTest
 
         public List<string> GetAddressTxIds(string address)
         {
-            var resp = client.MakeRequest<List<string>>(RestMethods.getaddresstxids, 
+            var resp = client.MakeRequest<List<string>>(ZecRestMethods.getaddresstxids, 
                 new Dictionary<string, List<string>>()
                 {
                     {"addresses", new List<string>(){ address }}
@@ -52,8 +52,8 @@ namespace ZCashTest
         
 
         public List<ZecDeltas> GetAddressDeltas(string address)
-        {  // ??? какая-то фигня или нет?
-            var resp = client.MakeRequest<List<ZecDeltas>>(RestMethods.getaddressdeltas,
+        {  
+            var resp = client.MakeRequest<List<ZecDeltas>>(ZecRestMethods.getaddressdeltas,
                 new Dictionary<string, List<string>>() { {"addresses",new List<string>(){ address } }});
 
             return resp;
@@ -75,11 +75,15 @@ namespace ZCashTest
             {
                 {"addresses", addresses}
             };
-            var resp = client.MakeRequest<ZecBalance>(RestMethods.getaddressbalance, addressList);
+            var resp = client.MakeRequest<ZecBalance>(ZecRestMethods.getaddressbalance, addressList);
             
             return resp;
         }
 
+        public string SendToAddress(string address,double amount)
+        {
+            return client.MakeRequest<string>(ZecRestMethods.sendtoaddress, address, amount);
+        }
 
         public string SendFromToAddress(string fromAddress, string toAddress, float amount)
         {
@@ -89,7 +93,7 @@ namespace ZCashTest
                 new List<ZecSendToAddressData>(){ new ZecSendToAddressData(toAddress, amount) }
             };
             
-            var resp = client.MakeRequest<string>(RestMethods.z_sendmany,fromAddress,new List<ZecSendToAddressData>(){ new ZecSendToAddressData(toAddress, amount) });
+            var resp = client.MakeRequest<string>(ZecRestMethods.z_sendmany,fromAddress,new List<ZecSendToAddressData>(){ new ZecSendToAddressData(toAddress, amount) });
             return resp;
         }
     }

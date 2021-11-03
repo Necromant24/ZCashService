@@ -15,7 +15,7 @@ namespace ZCashTest
 
         }
 
-        public T MakeRequest<T>(RestMethods rpcMethod, params object[] parameters)
+        public T MakeRequest<T>(ZecRestMethods rpcMethod, params object[] parameters)
         {
             var jsonRpcRequest = new JsonRpcRequest(1, rpcMethod.ToString(), parameters);
             var webRequest = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:18232/");
